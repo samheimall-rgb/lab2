@@ -6,8 +6,9 @@
   <meta name="theme-color" content="#f7f7fb">
   <meta name="description" content="A simple camera-based color identifier designed with accessibility in mind.">
   <title>Color Compass — Color Identifier</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="app.js" defer></script>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="manifest" href="./manifest.json">
+  <script src="./app.js" defer></script>
 </head>
 <body>
   <main class="app-shell">
@@ -86,5 +87,19 @@
       <p>Made to support color identification. This tool samples pixels; it does not diagnose color vision deficiency.</p>
     </footer>
   </main>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then((registration) => {
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+          })
+          .catch((err) => {
+            console.log('ServiceWorker registration failed: ', err);
+          });
+      });
+    }
+  </script>
 </body>
 </html>

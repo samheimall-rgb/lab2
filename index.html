@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f7fb">
+  <meta name="description" content="A simple camera-based color identifier designed with accessibility in mind.">
+  <title>Color Compass — Color Identifier</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div class="brand-mark" aria-hidden="true">◉</div>
+      <div>
+        <p class="eyebrow">A little more color confidence</p>
+        <h1>Color Compass</h1>
+      </div>
+    </header>
+
+    <section class="intro" aria-labelledby="intro-title">
+      <p class="pill">CAMERA COLOR IDENTIFIER</p>
+      <h2 id="intro-title">Wondering what color something is?</h2>
+      <p>Take a photo or choose one from your device, then tap the part of the image you want to identify.</p>
+    </section>
+
+    <section class="workspace" aria-label="Color identification tool">
+      <div class="photo-panel">
+        <div class="panel-heading">
+          <h3>Your photo</h3>
+          <span class="step">STEP 1</span>
+        </div>
+
+        <div class="preview-wrap" id="previewWrap">
+          <div class="empty-state" id="emptyState">
+            <div class="camera-icon" aria-hidden="true">▣</div>
+            <p>Your image will appear here</p>
+            <span>Choose a photo or use your camera</span>
+          </div>
+          <img id="photoPreview" alt="Selected photo. Tap the image to sample a color." hidden>
+          <canvas id="sampleCanvas" hidden></canvas>
+          <div class="crosshair" id="crosshair" hidden aria-hidden="true"><span></span></div>
+        </div>
+
+        <p class="hint" id="photoHint">After adding a photo, tap the area whose color you want to identify.</p>
+
+        <div class="actions">
+          <label class="button button-primary" for="photoInput">Choose / take photo</label>
+          <input id="photoInput" type="file" accept="image/*" capture="environment">
+          <button class="button button-secondary" id="cameraButton" type="button">Open live camera</button>
+        </div>
+
+        <div class="camera-area" id="cameraArea" hidden>
+          <video id="cameraVideo" autoplay playsinline muted aria-label="Live camera preview"></video>
+          <div class="camera-actions">
+            <button class="button button-primary" id="captureButton" type="button">Take photo</button>
+            <button class="button button-secondary" id="closeCameraButton" type="button">Close camera</button>
+          </div>
+        </div>
+        <p class="status" id="statusMessage" role="status" aria-live="polite"></p>
+      </div>
+
+      <aside class="result-panel" aria-labelledby="result-title">
+        <div class="panel-heading">
+          <h3 id="result-title">Color result</h3>
+          <span class="step">STEP 2</span>
+        </div>
+        <div class="swatch" id="colorSwatch" aria-label="No color selected"></div>
+        <p class="result-label">This looks like</p>
+        <p class="color-name" id="colorName" aria-live="polite">No color yet</p>
+        <p class="hex-value" id="hexValue">HEX —</p>
+        <button class="button button-secondary copy-button" id="copyButton" type="button" disabled>Copy color code</button>
+
+        <div class="divider"></div>
+        <h4>Try another spot</h4>
+        <p class="small-copy">Tap a different area of your photo to compare colors. For the best estimate, use natural light and avoid shadows or glare.</p>
+        <div class="tip-card">
+          <span aria-hidden="true">✦</span>
+          <p><strong>Accessibility tip</strong><br>Color names are estimates. Use the name and HEX code together when communicating a color.</p>
+        </div>
+      </aside>
+    </section>
+
+    <footer>
+      <p>Made to support color identification. This tool samples pixels; it does not diagnose color vision deficiency.</p>
+    </footer>
+  </main>
+</body>
+</html>
